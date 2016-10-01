@@ -113,3 +113,9 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+img {
+    height: 300px;
+    width: 300px;
+    background-color: blue;
+}
