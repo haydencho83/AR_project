@@ -1,5 +1,6 @@
-app.controller('CameraCtrl', function($scope) {
-    $scope.helloCamera = function() {
-     return "Hello Camera";
+app.controller('CameraCtrl', function($scope, CameraFactory) {
+    
+    $scope.takePicture = function(){
+    	CameraFactory.takePicture($scope);
     }
 });
