@@ -44,11 +44,14 @@
 </head>
 
 <body ng-app="app">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <div ng-controller="MainCtrl">
-        <h1>{{hello()}}</h1>
-        <h1>PhoneGap</h1>
+        <h1>latitude: {{lat}}</h1>
+        <h1>longitude: {{lon}}</h1>
+        <h1>position: {{pos}}</h1>
+        <button ng-click="updateCoords()">Update Info</button>
     </div>
 </body>
 
