@@ -21,4 +21,3 @@ app.controller('MainCtrl', function($scope, $cordovaGeolocation) {
     }
 
 });
-

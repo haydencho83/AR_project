@@ -39,6 +39,7 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <title>Hello World</title>
 </head>
@@ -47,11 +48,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/camera/camera.controller.js"></script>
+    <script type="text/javascript" src="js/camera/camera.factory.js"></script>
+
     <div ng-controller="MainCtrl">
         <h1>latitude: {{lat}}</h1>
         <h1>longitude: {{lon}}</h1>
         <h1>position: {{pos}}</h1>
         <button ng-click="updateCoords()">Update Info</button>
+    </div>
+
+    <div ng-controller="CameraCtrl">
+        <h1>{{helloCamera()}}</h1>
     </div>
 </body>
 
