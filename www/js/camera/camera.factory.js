@@ -1,9 +1,5 @@
 app.factory('CameraFactory', function($cordovaCamera, $log){
 
-	function helloCamera{
-		return "Hello Camera!";
-	}
-
 	function takePicture(scope){
 
 		    var options = {
@@ -29,7 +25,6 @@ app.factory('CameraFactory', function($cordovaCamera, $log){
 
 	// Factory service object to return
 	return {
-		helloCamera: helloCamera,
 		takePicture: takePicture,
 	}
 
