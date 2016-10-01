@@ -48,14 +48,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <!-- CAMERA -->
     <script type="text/javascript" src="js/camera/camera.controller.js"></script>
     <script type="text/javascript" src="js/camera/camera.factory.js"></script>
+    <!-- GEO LOCATION -->
+    <script type="text/javascript" src="js/geoLocation/geo.location.controller.js"></script>
+    <script type="text/javascript" src="js/geoLocation/geo.location.factory.js"></script>
 
-    <!-- <div ng-controller="MainCtrl">
+    <div ng-controller="geoLocationCtrl">
         <h1>position: {{pos}}</h1>
         <h1>heading: {{heading}}</h1>
-        <button ng-click="updateCoords()">Update Info</button>
-    </div> -->
+        <button ng-click="update()">Update Info</button>
+    </div>
 
     <div ng-controller="CameraCtrl">
         <div id="container">
