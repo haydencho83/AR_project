@@ -3,6 +3,7 @@ var app = angular.module('app', ['ngCordova']);
 app.controller('MainCtrl', function($scope, $cordovaGeolocation, $cordovaDeviceOrientation) {
     $scope.lat = null;
     $scope.lon = null;
+
     var posOptions = {timeout: 5000, enableHighAccuracy: false};
     var watchOptions = {timeout: 5000, enableHighAccuracy: false};
 
