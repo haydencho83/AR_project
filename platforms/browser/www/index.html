@@ -27,7 +27,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+   <!--  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; default-src * blob:" /> -->
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -51,16 +51,16 @@
     <script type="text/javascript" src="js/camera/camera.controller.js"></script>
     <script type="text/javascript" src="js/camera/camera.factory.js"></script>
 
-    <div ng-controller="MainCtrl">
+    <!-- <div ng-controller="MainCtrl">
         <h1>position: {{pos}}</h1>
         <h1>heading: {{heading}}</h1>
         <button ng-click="updateCoords()">Update Info</button>
-    </div>
+    </div> -->
 
     <div ng-controller="CameraCtrl">
-        <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
-        <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-        <button class="button" ng-click="takePicture()"> Take Picture </button>
+        <div id="container">
+        <video autoplay="true" id="videoElement"></video>
+        </div>
     </div>
 </body>
 
