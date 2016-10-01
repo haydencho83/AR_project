@@ -114,8 +114,17 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-img {
-    height: 300px;
-    width: 300px;
-    background-color: blue;
+#container {
+    margin: 0px auto;
+    width: document.innerWidth;
+    height: document.innerHeight;
+    border: 10px #333 solid;
+}
+
+#videoElement {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: #666;
 }

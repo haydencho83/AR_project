@@ -1,31 +1,38 @@
 app.factory('CameraFactory', function($cordovaCamera, $log){
 
-	function takePicture(scope){
 
-		    var options = {
-		      quality: 50,
-		      destinationType: Camera.DestinationType.DATA_URL,
-		      sourceType: Camera.PictureSourceType.CAMERA,
-		      allowEdit: true,
-		      encodingType: Camera.EncodingType.JPEG,
-		      targetWidth: 100,
-		      targetHeight: 100,
-		      popoverOptions: CameraPopoverOptions,
-		      saveToPhotoAlbum: false,
-			  correctOrientation:true
-		    };
+	function streamCamera(){
 
-		    $cordovaCamera.getPicture(options)
-		    .then(function(imageData) {
-		      scope.imgURI = "data:image/jpeg;base64," + imageData;
-		    })
-		    .catch($log)
+		document.addEventListener('deviceready', function () {
+
+		   var video = document.querySelector("#videoElement");
+		   
+		   navigator.getUserMedia = 
+		   	navigator.getUserMedia || 
+		   	navigator.webkitGetUserMedia || 
+		   	navigator.mozGetUserMedia || 
+		   	navigator.msGetUserMedia || 
+		   	navigator.oGetUserMedia;
+
+		   if (navigator.getUserMedia) {     
+		       navigator.getUserMedia({video: true}, handleVideo, videoError);
+		   }
+
+		   function handleVideo(stream) {
+		       video.src = window.URL.createObjectURL(stream);
+		   }
+		    
+		   function videoError(e) {
+		       // do something
+		   }
+
+		}, false);    
 
 	}
 
 	// Factory service object to return
 	return {
-		takePicture: takePicture,
+		streamCamera: streamCamera,
 	}
 
 });
