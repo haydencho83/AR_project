@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngCordova']);
 
-app.controller('MainCtrl', function($scope, $cordovaGeolocation) {
+app.controller('MainCtrl', function($scope, $cordovaGeolocation, $cordovaDeviceOrientation) {
     $scope.lat = null;
     $scope.lon = null;
     var posOptions = {timeout: 5000, enableHighAccuracy: false};
@@ -17,7 +17,21 @@ app.controller('MainCtrl', function($scope, $cordovaGeolocation) {
             })
             .catch(function(err){
                 console.error(err);
+            });
+
+        $cordovaDeviceOrientation
+            .getCurrentHeading()
+            .then(function(result) {
+                var magneticHeading = result.magneticHeading;
+                var trueHeading = result.trueHeading;
+                var accuracy = result.headingAccuracy;
+                var timeStamp = result.timestamp;
+                $scope.heading = result;
             })
+            .catch(function(err){
+                console.error(err);
+            });
+
     }
 
 });
