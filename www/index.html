@@ -61,7 +61,7 @@
         <div class="pos">
             <div ng-controller="geoLocationCtrl">
                 <div class="geo">
-                    <div>position: {{pos}}</div>
+                    <div>lat: {{pos.latitude}}   long: {{pos.longitude}}</div>
                     <div>heading: {{heading}}</div>
                     <button ng-click="update()">Update Info</button>
                 </div>

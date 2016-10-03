@@ -5,7 +5,6 @@ app.controller('geoLocationCtrl', function($scope, $log, geoLocationFactory){
     	geoLocationFactory.updateLocation()
     	.then(function(position){
     		$scope.pos = position.coords;
-    		return null;
     	})
         .catch($log)
 
