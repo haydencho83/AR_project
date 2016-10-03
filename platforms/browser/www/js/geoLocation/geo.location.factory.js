@@ -7,7 +7,7 @@ app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOr
     function updateLocation(){
     	return $cordovaGeolocation.getCurrentPosition(posOptions)
         .then(function(position) {
-        	return "lat: " + position.coords.latitude.toString().substring(0,15) + "\n" + "lon: " + position.coords.longitude.toString().substring(0,15)
+        	return position
         })
         .catch(function(err){
             console.error(err);
