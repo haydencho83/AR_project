@@ -56,7 +56,8 @@
     <script type="text/javascript" src="js/geoLocation/geo.location.factory.js"></script>
 
     <div ng-controller="geoLocationCtrl">
-        <h1>position: {{pos}}</h1>
+        <h1>lat: {{pos.latitude}}</h1>
+        <h1>long: {{pos.longitude}}</h1>
         <h1>heading: {{heading}}</h1>
         <button ng-click="update()">Update Info</button>
     </div>

@@ -1,7 +1,8 @@
 app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOrientation){
 
-	var posOptions = {timeout: 5000, enableHighAccuracy: false};
-    var watchOptions = {timeout: 5000, enableHighAccuracy: false};
+	var posOptions = {timeout: 500, enableHighAccuracy: true};
+    var watchOptions = {timeout: 500, enableHighAccuracy: true};
+    var geoLocationPos;
     
     function updateLocation(){
     	return $cordovaGeolocation.getCurrentPosition(posOptions)
