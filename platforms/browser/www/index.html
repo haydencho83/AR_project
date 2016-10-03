@@ -57,19 +57,19 @@
     <!-- SKETCH -->
     <script type="text/javascript" src="js/sketch/sketch.controller.js"></script>
     <script type="text/javascript" src="js/sketch/sketch.factory.js"></script>
-
-        <div ng-controller="geoLocationCtrl">
-            <h1>lat: {{pos.latitude}}</h1>
-            <h1>long: {{pos.longitude}}</h1>
-            <h1>heading: {{heading}}</h1>
-            <button ng-click="update()">Update Info</button>
+    
+        <div class="pos">
+            <div ng-controller="geoLocationCtrl">
+                <div class="geo">
+                    <div>position: {{pos}}</div>
+                    <div>heading: {{heading}}</div>
+                    <button ng-click="update()">Update Info</button>
+                </div>
+            </div>
         </div>
 
-        
         <div ng-controller="CameraCtrl">
-            <div id="container">
             <video autoplay="true" id="videoElement"></video>
-            </div>
         </div>
 
         <div ng-controller="SketchCtrl">
