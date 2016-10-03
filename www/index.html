@@ -41,7 +41,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <title>Hello World</title>
+    <title>AR Grafiti Client</title>
 </head>
 
 <body ng-app="app">
@@ -56,7 +56,8 @@
     <script type="text/javascript" src="js/geoLocation/geo.location.factory.js"></script>
 
     <div ng-controller="geoLocationCtrl">
-        <h1>position: {{pos}}</h1>
+        <h1>lat: {{pos.latitude}}</h1>
+        <h1>long: {{pos.longitude}}</h1>
         <h1>heading: {{heading}}</h1>
         <button ng-click="update()">Update Info</button>
     </div>
