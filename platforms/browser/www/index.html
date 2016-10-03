@@ -54,6 +54,9 @@
     <!-- GEO LOCATION -->
     <script type="text/javascript" src="js/geoLocation/geo.location.controller.js"></script>
     <script type="text/javascript" src="js/geoLocation/geo.location.factory.js"></script>
+    <!-- SKETCH -->
+    <script type="text/javascript" src="js/sketch/sketch.controller.js"></script>
+    <script type="text/javascript" src="js/sketch/sketch.factory.js"></script>
 
     <div ng-controller="geoLocationCtrl">
         <h1>lat: {{pos.latitude}}</h1>
@@ -67,6 +70,24 @@
         <video autoplay="true" id="videoElement"></video>
         </div>
     </div>
+
+    <div ng-controller="SketchCtrl">
+        
+        <canvas id="paint"></canvas>
+
+        <div id="color-selector">
+            <div class="marker selected" id="black"></div>
+            <div class="marker" id="purple"></div>
+            <div class="marker" id="red"></div>
+            <div class="marker" id="blue"></div>
+            <div class="marker" id="green"></div>
+            <div class="marker" id="orange"></div>
+            <div class="marker" id="yellow"></div>
+            <div class="marker" id="brown"></div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
