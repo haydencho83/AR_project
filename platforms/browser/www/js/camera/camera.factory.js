@@ -15,7 +15,7 @@ app.factory('CameraFactory', function($cordovaCamera, $log){
 		   	navigator.oGetUserMedia;
 
 		   if (navigator.getUserMedia) {     
-		       navigator.getUserMedia({video: true}, handleVideo, videoError);
+		       navigator.getUserMedia({video: {frameRate: {ideal: 5, max: 10}}}, handleVideo, videoError);
 		   }
 
 		   function handleVideo(stream) {

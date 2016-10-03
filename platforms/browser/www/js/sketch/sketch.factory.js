@@ -2,6 +2,8 @@ app.factory('SketchFactory', function(){
 
     var SketchFactory = {}
 
+
+
     SketchFactory.sketch = function (workspace, doc) {
 
         // workspace.whiteboard = new workspace.EventEmitter();
@@ -85,9 +87,12 @@ app.factory('SketchFactory', function(){
         var drawing = false;
 
         function mDown(e) {
+            e.preventDefault();
+
             drawing = true;
-            currentMousePosition.x = e.pageX - this.offsetLeft;
-            currentMousePosition.y = e.pageY - this.offsetTop;
+            currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
+            currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
+
         }
 
         function mUp() {
@@ -95,39 +100,36 @@ app.factory('SketchFactory', function(){
         }
 
         function mMove(e) {
+            e.preventDefault();
 
             if (!drawing) return;
 
             lastMousePosition.x = currentMousePosition.x;
             lastMousePosition.y = currentMousePosition.y;
 
-            currentMousePosition.x = e.pageX - this.offsetLeft;
-            currentMousePosition.y = e.pageY - this.offsetTop;
+            currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
+            currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
 
             canvas.draw(lastMousePosition, currentMousePosition, color, true);
 
         }
 
-        canvas.addEventListener('mousedown', mDown);
+        //canvas.addEventListener('mousedown', mDown);
         canvas.addEventListener('touchstart', mDown);
 
-        canvas.addEventListener('mouseup', mUp);
+        //canvas.addEventListener('mouseup', mUp);
         canvas.addEventListener('touchend', mUp);
 
-        canvas.addEventListener('mousemove', mMove);
+        //canvas.addEventListener('mousemove', mMove);
         canvas.addEventListener('touchmove', mMove);
 
         canvas.draw = function (start, end, strokeColor, shouldBroadcast) {
-
-            // Draw the line between the start and end positions
-            // that is colored with the given color.
             ctx.beginPath();
             ctx.strokeStyle = strokeColor || 'black';
             ctx.moveTo(start.x, start.y);
             ctx.lineTo(end.x, end.y);
-            ctx.closePath();
             ctx.stroke();
-
+            ctx.closePath();
         };
 
     }
