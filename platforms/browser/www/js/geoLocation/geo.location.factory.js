@@ -6,7 +6,7 @@ app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOr
     function updateLocation(){
     	return $cordovaGeolocation.getCurrentPosition(posOptions)
         .then(function(position) {
-        	return position
+        	return "lat: " + position.coords.latitude.toString().substring(0,15) + "\n" + "lon: " + position.coords.longitude.toString().substring(0,15)
         })
         .catch(function(err){
             console.error(err);
@@ -16,7 +16,7 @@ app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOr
     function updateOrientation(){
     	return $cordovaDeviceOrientation.getCurrentHeading()
         .then(function(heading) {
-        	return heading;
+        	return heading
         })
         .catch(function(err){
             console.error(err);

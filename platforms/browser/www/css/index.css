@@ -69,13 +69,17 @@ body {
     }
 }
 
-h1 {
-    font-size:24px;
+.pos {
+    background-color: white;
+    z-index: 1;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    font-size:12px;
     font-weight:normal;
-    margin:0px;
-    overflow:visible;
-    padding:0px;
+    overflow: scroll;
     text-align:center;
+    word-wrap: break-word;
 }
 
 .event {
@@ -122,7 +126,6 @@ h1 {
 }
 
 #videoElement {
-    display: block;
     position: absolute;
     z-index: 0;
     width: 100%;
@@ -136,13 +139,14 @@ canvas {
     z-index: 2;
     position: absolute;
     width: 100%; 
-    height: 100%;
+    height: 80%;
+    bottom: 0px;
 }
 
 #color-selector {
     z-index: 3;
     position: fixed;
-    top: 0;
+    bottom: 40px;
     right: 0;
     width: 80px;
     height: 120px;
@@ -159,3 +163,15 @@ canvas {
 .marker.selected {
     border: 2px solid white;
 }
+
+.geo {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
