@@ -6,6 +6,23 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
-    "dependent_plugins": {}
+    "installed_plugins": {
+        "cordova-plugin-sketch": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/cordova-plugin-sketch/www/sketch.js",
+            "id": "cordova-plugin-sketch.sketch",
+            "pluginId": "cordova-plugin-sketch",
+            "clobbers": [
+                "navigator.sketch"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-sketch": "0.1.0"
+    }
 }
