@@ -58,35 +58,36 @@
     <script type="text/javascript" src="js/sketch/sketch.controller.js"></script>
     <script type="text/javascript" src="js/sketch/sketch.factory.js"></script>
 
-    <div ng-controller="geoLocationCtrl">
-        <h1>lat: {{pos.latitude}}</h1>
-        <h1>long: {{pos.longitude}}</h1>
-        <h1>heading: {{heading}}</h1>
-        <button ng-click="update()">Update Info</button>
-    </div>
-
-    <div ng-controller="CameraCtrl">
-        <div id="container">
-        <video autoplay="true" id="videoElement"></video>
+        <div ng-controller="geoLocationCtrl">
+            <h1>lat: {{pos.latitude}}</h1>
+            <h1>long: {{pos.longitude}}</h1>
+            <h1>heading: {{heading}}</h1>
+            <button ng-click="update()">Update Info</button>
         </div>
-    </div>
 
-    <div ng-controller="SketchCtrl">
         
-        <canvas id="paint"></canvas>
-
-        <div id="color-selector">
-            <div class="marker selected" id="black"></div>
-            <div class="marker" id="purple"></div>
-            <div class="marker" id="red"></div>
-            <div class="marker" id="blue"></div>
-            <div class="marker" id="green"></div>
-            <div class="marker" id="orange"></div>
-            <div class="marker" id="yellow"></div>
-            <div class="marker" id="brown"></div>
+        <div ng-controller="CameraCtrl">
+            <div id="container">
+            <video autoplay="true" id="videoElement"></video>
+            </div>
         </div>
 
-    </div>
+        <div ng-controller="SketchCtrl">
+            
+            <canvas id="paint"></canvas>
+
+            <div id="color-selector">
+                <div class="marker selected" id="black"></div>
+                <div class="marker" id="purple"></div>
+                <div class="marker" id="red"></div>
+                <div class="marker" id="blue"></div>
+                <div class="marker" id="green"></div>
+                <div class="marker" id="orange"></div>
+                <div class="marker" id="yellow"></div>
+                <div class="marker" id="brown"></div>
+            </div>
+
+        </div>
 
 </body>
 
