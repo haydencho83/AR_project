@@ -1,3 +1,5 @@
+
+
 app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOrientation,$http){
 
 	var posOptions = {timeout: 500, enableHighAccuracy: true};
