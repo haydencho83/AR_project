@@ -2,6 +2,50 @@ app.factory('SketchFactory', function($http){
 
     var SketchFactory = {}
 
+    var savedCanvas;
+    var width, height;
+    var canvas;
+    var ctx;
+
+    function obj(index, value){
+        this.index = index
+        this.value = value
+    }
+
+    SketchFactory.saveCanvas = function(){
+
+        savedCanvas = ctx.getImageData(0,0,800,650);
+        width = savedCanvas.width;
+        height = savedCanvas.height;
+        savedCanvas = savedCanvas.data;
+
+        console.log("Start: ", savedCanvas)
+
+        
+        var savedCanvas2 = Array.prototype.map.call(savedCanvas,function(val, i){
+            var obj = {index: i, value:val }
+            return obj;
+            // return new obj(i, val); //{ index: i, value: val}
+        })
+        console.log("middle: ", savedCanvas2.length)
+
+        var savedCanvas3 = Array.prototype.filter.call(savedCanvas2, function(obj){
+            return obj.value > 0
+        })
+
+        console.log("After: ", savedCanvas3.length)
+    }
+
+    SketchFactory.loadCanvas = function(){
+        // var newImg = document.createElement("img")
+        // newImg.src = savedCanvas;
+        // ctx.drawImage(newImg, 0, 0)
+
+        
+        //ctx.putImageData(savedCanvas,0,0);
+    }
+
+
 
 
     SketchFactory.sketch = function (workspace, doc) {
@@ -34,9 +78,9 @@ app.factory('SketchFactory', function($http){
 
         });
 
-        var canvas = doc.getElementById('paint');
+        canvas = doc.getElementById('paint');
         
-        var ctx = canvas.getContext('2d')
+        ctx = canvas.getContext('2d')
 
         function resize() {
             // Unscale the canvas (if it was previously scaled)

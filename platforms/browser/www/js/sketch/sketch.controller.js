@@ -8,4 +8,8 @@ app.controller('SketchCtrl', function($scope, SketchFactory) {
 		SketchFactory.save(win,doc)
 	}
 
+	$scope.saveCanvas = SketchFactory.saveCanvas
+
+	$scope.loadCanvas = SketchFactory.loadCanvas
+
 });
