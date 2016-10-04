@@ -72,11 +72,17 @@
             <video autoplay="true" id="videoElement"></video>
         </div>
 
-        <div ng-controller="SketchCtrl">
+        <div id="tester" ng-controller="SketchCtrl">
+
+
             
             <canvas id="paint"></canvas>
 
+
             <div id="color-selector">
+
+                <button class="save-btn" ng-click="savePng()">SAVE</button>
+
                 <div class="marker selected" id="black"></div>
                 <div class="marker" id="purple"></div>
                 <div class="marker" id="red"></div>
