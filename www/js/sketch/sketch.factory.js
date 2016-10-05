@@ -144,18 +144,30 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     SketchFactory.saveImg = function(workspace, doc){
         
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         var canvasPointsString = canvasPoints.join(",")
 
-        $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString })
-        .then(function(response){
-            console.log("posted")
-            console.log('!!!!!!!!!!',geoLocationFactory.updateLocation())
-            console.log(response)
-            return response.data // Don't do anything right now
-        })
-        .catch($log)
+        geoLocationFactory.updateLocation()
+            .then((position) =>{
+                console.log('coord!!!!!s',position.coords)
+
+
+            $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString, puppy:'cute puppy', location: position.coords })
+                .then(function(response){
+                    console.log("posted")
+
+                    console.log(response)
+                    return response.data // Don't do anything right now
+                })
+                .catch($log)
+
+
+        }).catch($log)
+
+
+
+
 
     } /* End of saveImg Function */
 
