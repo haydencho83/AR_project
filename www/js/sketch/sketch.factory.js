@@ -1,4 +1,4 @@
-app.factory('SketchFactory', function($http, $log){
+app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     var SketchFactory = {}
 
@@ -34,12 +34,16 @@ app.factory('SketchFactory', function($http, $log){
 
         var canvasPointsString = canvasPoints.join(",")
 
-        $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString })
-        .then(function(){
+        geoLocationFactory.updateLocation()
+        .then( position =>
+            $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString, location: position.coords })
+        )
+        .then( (response) => {
             // Dont care about the response here
             // Our log below will let us know if something didn't go correctly 
+            // Leaving this here for now in case we want to do something later
         })
-        .catch($log)
+        .catch($log)    
 
     } /* End of saveImg Function */
 
@@ -52,7 +56,6 @@ app.factory('SketchFactory', function($http, $log){
             return response.data.image;
         })
         .then(function(canvasString){
-            console.log(canvasString)
             
             var canvasArray = canvasString.split(",")
             for( var i = 0; i < canvasArray.length; i += 5 ){
@@ -152,33 +155,32 @@ app.factory('SketchFactory', function($http, $log){
 
         }
 
-        function mUp() {
-            drawing = false;
-        }
+    function mUp() {
+        drawing = false;
+    }
 
-        function mMove(e) {
-            e.preventDefault();
+    function mMove(e) {
+        e.preventDefault();
 
-            if (!drawing) return;
+        if (!drawing) return;
 
-            lastMousePosition.x = currentMousePosition.x;
-            lastMousePosition.y = currentMousePosition.y;
+        lastMousePosition.x = currentMousePosition.x;
+        lastMousePosition.y = currentMousePosition.y;
 
-            currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
-            currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
+        currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
+        currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
 
-            // Push our points into an array
-            canvasPoints.push(
-                lastMousePosition.x + "," + 
-                lastMousePosition.y + "," + 
-                currentMousePosition.x + "," +
-                currentMousePosition.y + "," + 
-                color
-            )
-            canvas.draw(lastMousePosition, currentMousePosition, color);
+        // Push our points into an array
+        canvasPoints.push(
+            lastMousePosition.x + "," + 
+            lastMousePosition.y + "," + 
+            currentMousePosition.x + "," +
+            currentMousePosition.y + "," + 
+            color
+        )
 
-        }
-
+        canvas.draw(lastMousePosition, currentMousePosition, color);
+    }
 
     /* -------------------- COLOR ELEMENT FUNCTIONS -------------------- */
 
