@@ -1,4 +1,6 @@
-app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOrientation){
+
+
+app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOrientation,$http){
 
 	var posOptions = {timeout: 500, enableHighAccuracy: true};
     var watchOptions = {timeout: 500, enableHighAccuracy: true};
@@ -7,7 +9,16 @@ app.factory('geoLocationFactory', function($cordovaGeolocation, $cordovaDeviceOr
     function updateLocation(){
     	return $cordovaGeolocation.getCurrentPosition(posOptions)
         .then(function(position) {
-        	return position
+
+                $http.get('http://192.168.5.251:1337/api/locations/ping/'+position.coords.longitude+"/"+position.coords.latitude)
+                    .then(function(response){
+
+
+                        return response.data;
+                    });
+
+
+            return position
         })
         .catch(function(err){
             console.error(err);
