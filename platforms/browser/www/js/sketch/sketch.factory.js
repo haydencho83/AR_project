@@ -1,4 +1,4 @@
-app.factory('SketchFactory', function($http, $log){
+app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
 
     var SketchFactory = {}
 
@@ -151,6 +151,7 @@ app.factory('SketchFactory', function($http, $log){
         $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString })
         .then(function(response){
             console.log("posted")
+            console.log('!!!!!!!!!!',geoLocationFactory.updateLocation())
             console.log(response)
             return response.data // Don't do anything right now
         })
