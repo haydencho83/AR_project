@@ -35,9 +35,10 @@ app.factory('SketchFactory', function($http, $log, geoLocationFactory ){
         var canvasPointsString = canvasPoints.join(",")
 
         geoLocationFactory.updateLocation()
-        .then( position =>
-            $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString, location: position.coords })
-        )
+        .then( (position) => {
+                $http.post('http://192.168.5.251:1337/api/drawings', {image: canvasPointsString, longitude: position.coords.longitude, latitude:position.coords.latitude})
+            }
+            )
         .then( (response) => {
             // Dont care about the response here
             // Our log below will let us know if something didn't go correctly 
