@@ -5,7 +5,11 @@ app.controller('SketchCtrl', function($scope, SketchFactory) {
 	SketchFactory.sketch(win, doc) 
 
 	$scope.savePng = function(){
-		SketchFactory.save(win,doc)
+		SketchFactory.saveImg(win,doc)
+	}
+
+	$scope.loadPng = function(){
+		SketchFactory.loadImg(win,doc)
 	}
 
 	$scope.saveCanvas = SketchFactory.saveCanvas
