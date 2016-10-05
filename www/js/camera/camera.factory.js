@@ -31,7 +31,7 @@ app.factory('CameraFactory', function($cordovaCamera, $log){
 	}
 
 	// Factory service object to return
-	console.log('hello')
+
 	return {
 		streamCamera: streamCamera,
 	}

@@ -1,56 +1,12 @@
-app.factory('SketchFactory', function($http){
+app.factory('SketchFactory', function($http, $log){
 
     var SketchFactory = {}
 
-    var savedCanvas;
-    var width, height;
     var canvas;
     var ctx;
-
-    function obj(index, value){
-        this.index = index
-        this.value = value
-    }
-
-    SketchFactory.saveCanvas = function(){
-
-        savedCanvas = ctx.getImageData(0,0,800,650);
-        width = savedCanvas.width;
-        height = savedCanvas.height;
-        savedCanvas = savedCanvas.data;
-
-        console.log("Start: ", savedCanvas)
-
-        
-        var savedCanvas2 = Array.prototype.map.call(savedCanvas,function(val, i){
-            var obj = {index: i, value:val }
-            return obj;
-            // return new obj(i, val); //{ index: i, value: val}
-        })
-        console.log("middle: ", savedCanvas2.length)
-
-        var savedCanvas3 = Array.prototype.filter.call(savedCanvas2, function(obj){
-            return obj.value > 0
-        })
-
-        console.log("After: ", savedCanvas3.length)
-    }
-
-    SketchFactory.loadCanvas = function(){
-        // var newImg = document.createElement("img")
-        // newImg.src = savedCanvas;
-        // ctx.drawImage(newImg, 0, 0)
-
-        
-        //ctx.putImageData(savedCanvas,0,0);
-    }
-
-
-
+    var canvasPoints = [];
 
     SketchFactory.sketch = function (workspace, doc) {
-
-        // workspace.whiteboard = new workspace.EventEmitter();
 
         // Ultimately, the color of our stroke;
         var color;
@@ -154,7 +110,15 @@ app.factory('SketchFactory', function($http){
             currentMousePosition.x = e.changedTouches[0].pageX - this.offsetLeft;
             currentMousePosition.y = e.changedTouches[0].pageY - this.offsetTop;
 
-            canvas.draw(lastMousePosition, currentMousePosition, color, true);
+            // Push our points into an array
+            canvasPoints.push(
+                lastMousePosition.x + "," + 
+                lastMousePosition.y + "," + 
+                currentMousePosition.x + "," +
+                currentMousePosition.y + "," + 
+                color
+            )
+            canvas.draw(lastMousePosition, currentMousePosition, color);
 
         }
 
@@ -167,7 +131,7 @@ app.factory('SketchFactory', function($http){
         //canvas.addEventListener('mousemove', mMove);
         canvas.addEventListener('touchmove', mMove);
 
-        canvas.draw = function (start, end, strokeColor, shouldBroadcast) {
+        canvas.draw = function (start, end, strokeColor) {
             ctx.beginPath();
             ctx.strokeStyle = strokeColor || 'black';
             ctx.moveTo(start.x, start.y);
@@ -178,48 +142,54 @@ app.factory('SketchFactory', function($http){
 
     }
 
-    SketchFactory.save = function(workspace,doc){
-        var drawing = doc.getElementById('paint')
-        var data = drawing.toDataURL("image/png")
+    SketchFactory.saveImg = function(workspace, doc){
         
-        var blob = drawing.toBlob(function(blob) {
-          var newImg = document.createElement("img");
-          var url = URL.createObjectURL(blob);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          newImg.onload = function() {
-            // no longer need to read the blob so it's revoked
-            URL.revokeObjectURL(url);
-          };
-          console.log(url)
+        var canvasPointsString = canvasPoints.join(",")
 
-          newImg.src = url;
-
-          // var geo = doc.getElementsByClassName('geo')
-          // console.log(geo)
-          var canvas = doc.getElementById('paint')
-          console.log(canvas)
-          var parent = doc.getElementById('tester')
-          console.log(parent)
-          var style = canvas.style
-          parent.removeChild(canvas)
-
-          workspace.setTimeout(function(){
-            newImg.style.backgroundColor = "transparent"
-            newImg.style.zIndex = "2"
-            newImg.style.position = "absolute"
-            newImg.style.width = "100%"
-            newImg.style.height = "80%"
-            newImg.style.bottom = "0px"
-            doc.body.appendChild(newImg)
-          }, 2000)
-
-
+        $http.post('http://192.168.5.251:1337/api/drawings', { image: canvasPointsString })
+        .then(function(response){
+            console.log("posted")
+            console.log(response)
+            return response.data // Don't do anything right now
         })
-        
-        // $http.post('http://192.168.5.251:1337/api/drawings', blob)
-        // .then(function(response){
-        //     return response.data
-        // })
+        .catch($log)
+
+    } /* End of saveImg Function */
+
+    SketchFactory.loadImg = function(workspace, doc){
+
+        var drawing = doc.getElementById('paint')
+
+        $http.get('http://192.168.5.251:1337/api/drawings/21')
+        .then(function(response){
+            console.log("responded")
+            return response.data.image;
+        })
+        .then(function(canvasString){
+            console.log(canvasString)
+            
+            var canvasArray = canvasString.split(",")
+            for( var i = 0; i < canvasArray.length; i += 5 ){
+
+                canvas.draw(  /* Start Point */
+                             { x: canvasArray[i],
+                               y: canvasArray[i+1] 
+                             }, 
+                             /* End Point */
+                             {
+                                x: canvasArray[i + 2],
+                                y: canvasArray[i + 3]
+                             },
+                             /* Color */
+                             canvasArray[i + 4]
+                             );
+            }
+            
+        })
+        .catch($log)
+
     }
 
     return SketchFactory
