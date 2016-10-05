@@ -1,19 +1,13 @@
 app.controller('SketchCtrl', function($scope, SketchFactory) {
-	var win = window
-	var doc = document
 
-	SketchFactory.sketch(win, doc) 
+	SketchFactory.initialize(window, document) 
 
 	$scope.savePng = function(){
-		SketchFactory.saveImg(win,doc)
+		SketchFactory.saveImg()
 	}
 
 	$scope.loadPng = function(){
-		SketchFactory.loadImg(win,doc)
+		SketchFactory.loadImg()
 	}
-
-	$scope.saveCanvas = SketchFactory.saveCanvas
-
-	$scope.loadCanvas = SketchFactory.loadCanvas
 
 });
