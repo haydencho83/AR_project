@@ -27,7 +27,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-   <!--  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; default-src * blob:" /> -->
+    <!--  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; default-src * blob:" /> -->
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -48,6 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-cordova/0.1.27-alpha/ng-cordova.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="plugins/com.mbppower.camerapreview/www/CameraPreview.js"></script>
     <!-- CAMERA -->
     <script type="text/javascript" src="js/camera/camera.controller.js"></script>
     <script type="text/javascript" src="js/camera/camera.factory.js"></script>
@@ -57,28 +58,46 @@
     <!-- SKETCH -->
     <script type="text/javascript" src="js/sketch/sketch.controller.js"></script>
     <script type="text/javascript" src="js/sketch/sketch.factory.js"></script>
-    
-        <div class="pos">
-            <div ng-controller="geoLocationCtrl">
-                <div class="geo">
-                    <div>lat: {{pos.latitude}}   long: {{pos.longitude}}</div>
-                    <div>heading: {{heading}}</div>
-                    <button ng-click="update()">Update Info</button>
-                </div>
+
+    <div class="pos">
+        <div ng-controller="geoLocationCtrl">
+            <div class="geo">
+                <div>lat: {{pos.latitude}} long: {{pos.longitude}}</div>
+                <div>heading: {{heading}}</div>
+                <button ng-click="update()">Update Info</button>
             </div>
         </div>
+    </div>
 
-        <div ng-controller="CameraCtrl">
-            <video autoplay="true" id="videoElement"></video>
+    <div ng-controller="CameraCtrl">
+        <!--<video autoplay="true" id="videoElement"></video>-->
+        <div class="controls">
+            <div class="block">
+                <button id="startCameraButton">Start Camera at back</button>
+                <button id="stopCameraButton">Stop Camera</button>
+            </div>
+
+            <div class="block">
+                <p><button id="startCameraAnotherPosButton">Start Camera at front</button></p>
+            </div>
+
+            <div class="block">
+                <button id="takePictureButton">Take Picture</button>
+                <button id="switchCameraButton">Switch Camera</button>
+            </div>
+            <div class="block">
+                <button id="hideButton">Hide</button>
+                <button id="showButton">Show</button>
+            </div>
         </div>
+        <div class="pictures">
+            <p><img id="previewPicture" width="200" /></p>
+            <p><img id="originalPicture" width="200" /></p>
+        </div>
+    </div>
 
-        <div id="tester" ng-controller="SketchCtrl">
-
-
-            
+    <!--<div id="painting" ng-controller="SketchCtrl">
             <canvas id="paint"></canvas>
-
-
             <div id="color-selector">
 
                 <button class="save-btn" ng-click="savePng()">SAVE</button>
@@ -94,7 +113,11 @@
                 <div class="marker" id="brown"></div>
             </div>
 
-        </div>
+        </div>-->
+
+
+
+
 
 </body>
 
